@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_todo"
+
+            app:showAsAction="always"
+            app:iconTint="#66BB6A"
+            android:icon="@drawable/ic_todo"
+            android:title="@string/tool_bar"/>
+        <item android:id="@+id/nav_note"
+            app:showAsAction="always"
+            app:iconTint="#66BB6A"
+            android:icon="@drawable/ic_note"
+            android:title="@string/note"/>
+
+        <item android:id="@+id/nav_calendar"
+            app:showAsAction="always"
+            app:iconTint="@color/black"
+            android:icon="@drawable/ic_calendar"
+            android:title="@string/calendar"/>
+
+
+        <!-- <item android:id="@+id/nav_theme"
+             app:showAsAction="always"
+             app:iconTint="#66BB6A"
+            android:icon="@drawable/ic_theme"
+             android:title="@string/theme"/>-->
+
+
+        <item
+
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/about"
+            app:iconTint="#66BB6A"
+            app:showAsAction="always" />
+
+
+    </group>
+</menu>

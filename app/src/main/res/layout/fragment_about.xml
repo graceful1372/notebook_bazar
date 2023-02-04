@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.about.AboutFragment">
+
+    <!--Text top -->
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/about_fragmet"
+        android:textSize="20dp"
+        android:fontFamily="@font/vazir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_green"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--Connection-->
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/vazir"
+        android:paddingHorizontal="10dp"
+        android:text="@string/way_of_connection_with_us"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_green"
+
+
+        app:layout_constraintTop_toBottomOf="@id/txt1" />
+
+
+
+
+    <View
+        android:id="@+id/view_green"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent" />
+<!--linkedin address -->
+    <ImageView
+        android:id="@+id/img_linkedin"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/liknedin"
+        app:layout_constraintStart_toEndOf="@id/view_green"
+        app:layout_constraintTop_toBottomOf="@id/txt2" />
+
+<!--GitHub address-->
+    <ImageView
+        android:id="@+id/img_github"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:src="@drawable/github"
+
+        app:layout_constraintBottom_toBottomOf="@+id/img_linkedin"
+        app:layout_constraintStart_toEndOf="@id/img_linkedin"
+        app:layout_constraintTop_toTopOf="@+id/img_linkedin" />
+
+
+<!--Gmail address-->
+    <ImageView
+        android:id="@+id/img_gmail"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:src="@drawable/gmail"
+        app:layout_constraintBottom_toBottomOf="@+id/img_github"
+        app:layout_constraintStart_toEndOf="@id/img_github"
+        app:layout_constraintTop_toTopOf="@+id/img_github" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

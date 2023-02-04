@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Notebook</string>
+    <string name="tool_bar">Todo</string>
+    <string name="delete" translatable="false">Delete</string>
+    <string name="actionFilter" translatable="false">actionFilter</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="note">Note</string>
+    <string name="calendar">Calendar</string>
+    <string name="hi">hello</string>
+    <string name="about">About</string>
+    <string name="theme">Theme</string>
+    <string name="OK">OK</string>
+    <string name="search">Search…</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_text">This here can write your note .</string>
+    <string name="way_of_connection_with_us">Way of connection with us</string>
+    <string name="address_copy">The address was copied</string>
+    <string name="about_fragmet">This program is presented as a notebook with version 1.0.0, which also includes personal calendar features.</string>
+
+    <!--Calendar-->
+    <!--    Calendar-->
+    <string name="saturday" translatable="false">شنبه</string>
+    <string name="sunday" translatable="false">یکشنبه</string>
+    <string name="monday" translatable="false">دوشنبه</string>
+    <string name="tuesday" translatable="false">سه شنبه</string>
+    <string name="wednesdays" translatable="false">چهارشنبه</string>
+    <string name="thursday" translatable="false">پنجشنبه</string>
+    <string name="friday" translatable="false">جمعه</string>
+    <string name="events_of_this_day" translatable="false">مناسبت های این روز :</string>
+    <string name="set_a_work_to_do" translatable="false">کاری برای انجام در این روز تنظیم کنید</string>
+    <string name="google_calendar_events" translatable="false">رویدادهای تقویم گوگل :</string>
+    <string name="last_month" translatable="false">ماه قبل</string>
+    <string name="next_month" translatable="false">ماه بعد</string>
+    <string name="farvardin" translatable="false">فروردین</string>
+    <string name="ordibehesht" translatable="false">اردیبهشت</string>
+    <string name="khordad" translatable="false">خرداد</string>
+    <string name="tir" translatable="false">تیر</string>
+    <string name="mordad" translatable="false">مرداد</string>
+    <string name="shahrivar" translatable="false">شهریور</string>
+    <string name="mehr" translatable="false">مهر</string>
+    <string name="aban" translatable="false">آبان</string>
+    <string name="azar" translatable="false">آذر</string>
+    <string name="dey" translatable="false">دی</string>
+    <string name="bahman" translatable="false">بهمن</string>
+    <string name="esfand" translatable="false">اسفند</string>
+    <string name="january" translatable="false">ژانویه</string>
+    <string name="february" translatable="false">فوریه</string>
+    <string name="march" translatable="false">مارس</string>
+    <string name="april" translatable="false">آوریل</string>
+    <string name="may" translatable="false">مه</string>
+    <string name="jun" translatable="false">ژوئن</string>
+    <string name="july" translatable="false">ژوئیه</string>
+    <string name="august" translatable="false">اوت</string>
+    <string name="september" translatable="false">سپتامبر</string>
+    <string name="october" translatable="false">اکتبر</string>
+    <string name="november" translatable="false">نوامبر</string>
+    <string name="december" translatable="false">دسامبر</string>
+    <string name="no_events" translatable="false">مناسبتی برای این روز وجود ندارد</string>
+    <string name="google_calendar_is_not_installed" translatable="false">برای استفاده از این ویژگی نیاز است که برنامه تقویم گوگل را نصب نمایید</string>
+    <string name="persian_full_date" translatable="false">%1s %2s %3s %4s</string>
+    <string name="gregorian_full_date" translatable="false">%1s %2s %3s</string>
+    <string name="Edit" translatable="false">Edit</string>
+    <string name="open_friday" translatable="false">روز جمعه باز است</string>
+    <string name="am" translatable="false">AM</string>
+    <string name="pm" translatable="false">PM</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_todo">
+
+    <fragment
+        android:id="@+id/nav_todo"
+        android:name="com.graceful1372.notebook.ui.todo.TodoFragment"
+        android:label="@string/tool_bar"
+        tools:layout="@layout/fragment_todo" />
+
+    <fragment
+        android:id="@+id/nav_calendar"
+        android:name="com.graceful1372.notebook.ui.calendar.CalendarFragment"
+        android:label="@string/calendar"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/nav_note"
+        android:name="com.graceful1372.notebook.ui.note.NoteFragment"
+        android:label="@string/note"
+        tools:layout="@layout/fragment_note" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.graceful1372.notebook.ui.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+</navigation>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--Background top-->
+    <View
+        android:id="@+id/view_top"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/background_viewtop"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <!--Background recyclerview-->
+    <View
+        android:id="@+id/view_bot"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/Navy_blue"
+        app:layout_constraintBottom_toBottomOf="@id/recyclerCalendar"
+        app:layout_constraintEnd_toEndOf="@id/view_top"
+        app:layout_constraintStart_toStartOf="@id/view_top"
+        app:layout_constraintTop_toBottomOf="@+id/view_top" />
+
+    <!--Button next-->
+    <ImageView
+        android:id="@+id/imgNextMonth"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="30dp"
+        android:contentDescription="@string/next_month"
+        android:src="@drawable/ic_next"
+        app:layout_constraintStart_toEndOf="@id/imgPreviousMonth"
+        app:layout_constraintTop_toTopOf="@+id/txtYear" />
+
+    <!--Button previous-->
+    <ImageView
+        android:id="@+id/imgPreviousMonth"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@string/last_month"
+        android:rotation="180"
+        android:src="@drawable/ic_next"
+        app:layout_constraintBottom_toBottomOf="@+id/imgNextMonth"
+        app:layout_constraintStart_toStartOf="@id/view_bot"
+        app:layout_constraintTop_toTopOf="@+id/imgNextMonth" />
+
+    <!--Day-->
+    <TextView
+        android:id="@+id/txtDayOfWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/vazir"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/view_top"
+        app:layout_constraintEnd_toEndOf="@id/view_top"
+        app:layout_constraintTop_toTopOf="@id/view_top" />
+
+    <!--Month -->
+    <TextView
+        android:id="@+id/txtMonthName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/vazir"
+        android:text="تیرماه"
+        android:textColor="@color/light_navy"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/view_bot"
+        app:layout_constraintTop_toBottomOf="@id/view_top" />
+    <!--Year-->
+    <TextView
+        android:id="@+id/txtYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="10dp"
+        android:text="1401"
+        android:textColor="@color/light_navy"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txtMonthName"
+        app:layout_constraintEnd_toStartOf="@id/txtMonthName"
+        app:layout_constraintTop_toTopOf="@id/txtMonthName" />
+
+    <!--Day od week -->
+    <LinearLayout
+        android:id="@+id/weekDaysLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toTopOf="@id/recyclerCalendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtYear">
+
+        <TextView
+            style="@style/text_DayOfWeek"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/saturday" />
+
+        <TextView
+            style="@style/text_DayOfWeek"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/sunday" />
+
+        <TextView
+            style="@style/text_DayOfWeek"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/monday" />
+
+        <TextView
+            style="@style/text_DayOfWeek"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/tuesday" />
+
+        <TextView
+            style="@style/text_DayOfWeek"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/wednesdays" />
+
+        <TextView
+            style="@style/text_DayOfWeek"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/thursday" />
+
+        <TextView
+            style="@style/text_DayOfWeek"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/friday"
+
+
+            />
+
+    </LinearLayout>
+
+    <!--Show day of month-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layoutDirection="rtl"
+        android:paddingRight="5dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="@id/view_bot"
+        app:layout_constraintStart_toStartOf="@id/view_bot"
+        app:layout_constraintTop_toBottomOf="@id/weekDaysLayout"
+        app:spanCount="7"
+        tools:listitem="@layout/calendar_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
