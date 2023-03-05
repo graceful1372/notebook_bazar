@@ -25,6 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="@color/white"
+        android:elevation="3dp"
+
         app:layout_constraintBottom_toBottomOf="parent">
 
         <!--Open calendar-->
@@ -71,6 +74,7 @@
             android:id="@+id/txt_show_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/vazir"
             app:layout_constraintBottom_toTopOf="@id/text_input"
             app:layout_constraintStart_toEndOf="@id/btn_calendar"
             android:padding="4dp"

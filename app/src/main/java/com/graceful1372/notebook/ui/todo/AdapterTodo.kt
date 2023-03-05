@@ -1,6 +1,7 @@
 package com.graceful1372.notebook.ui.todo
 
 import android.provider.ContactsContract.CommonDataKinds.Note
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,45 +10,60 @@ import androidx.recyclerview.widget.RecyclerView
 import com.graceful1372.notebook.data.model.NoteEntity
 import com.graceful1372.notebook.databinding.ItemChildTodoBinding
 import com.graceful1372.notebook.databinding.ItemDateTodoBinding
+import com.graceful1372.notebook.utils.toPersian
+import java.util.Locale
+import javax.inject.Inject
 
-class AdapterTodo( private var items : List<ListItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //Binding
-    private lateinit var binding:  ItemDateTodoBinding
-    private lateinit var bindingChild:ItemChildTodoBinding
-
+    private lateinit var binding: ItemDateTodoBinding
+    private lateinit var bindingChild: ItemChildTodoBinding
+    private var items = emptyList<ListItem>()
     private var items2 = emptyList<NoteEntity>()
 
-
+    //Check to persian mode in device
+    val currentLocal = Locale.getDefault()
 
     inner class DateViewHolder(val binding: ItemDateTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DateItem) {
-            binding.showTime.text = item.date
+
+            if (currentLocal.language == "fa") {
+                binding.showTime.text = item.date.toPersian()
+            } else {
+                binding.showTime.text = item.date
+            }
         }
     }
 
     inner class TodoViewModel(binding: ItemChildTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GeneralItem) {
-            bindingChild.txtShowTodo.text = item.todo
 
+
+            bindingChild.apply {
+                txtShowTodo.text = item.todo
+               txtShowTodo.maxLines = 1;
+                txtShowTodo.ellipsize = TextUtils.TruncateAt.END;
+            }
+            bindingChild.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(item)
+//                    bindingChild.viewDone.visibility = View.VISIBLE
+                }
+            }
         }
 
         // Click 
-        fun click(itemclick:NoteEntity){
-            bindingChild.root.setOnClickListener{
-                onItemClickListener?.let {
-                    it(itemclick)
-                    bindingChild.viewDone.visibility = View.VISIBLE
-                }
-            }
+        fun click(itemclick: NoteEntity) {
+
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = ItemDateTodoBinding.inflate(layoutInflater , parent , false)
+        binding = ItemDateTodoBinding.inflate(layoutInflater, parent, false)
         bindingChild = ItemChildTodoBinding.inflate(layoutInflater, parent, false)
 
 
@@ -74,11 +90,12 @@ class AdapterTodo( private var items : List<ListItem>) : RecyclerView.Adapter<Re
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        when(holder.itemViewType){
-            ListItem.TYPE_DATE ->(holder as DateViewHolder).bind(
-                item = items[position] as DateItem)
+        when (holder.itemViewType) {
+            ListItem.TYPE_DATE -> (holder as DateViewHolder).bind(
+                item = items[position] as DateItem
+            )
 
-            ListItem.TYPE_GENERAL ->{
+            ListItem.TYPE_GENERAL -> {
                 (holder as TodoViewModel).bind(item = items[position] as GeneralItem)
 
                 // این قسمت برای تیک زدن وظایف انجام شده است
@@ -114,16 +131,16 @@ class AdapterTodo( private var items : List<ListItem>) : RecyclerView.Adapter<Re
 
     }
 
-    /*fun setData(data: List<NoteEntity>) {
+    fun setData(data: List<ListItem>) {
         val todoDiffUtil = TodoDiffUtils(items, data)
         val diffUtils = DiffUtil.calculateDiff(todoDiffUtil)
         items = data
         diffUtils.dispatchUpdatesTo(this)
     }
-*/
+
     //Click
-    private var onItemClickListener: ((NoteEntity) -> Unit)? = null
-    fun setOnItemClickListener(listener: (NoteEntity) -> Unit) {
+    private var onItemClickListener: ((GeneralItem) -> Unit)? = null
+    fun setOnItemClickListener(listener: (GeneralItem) -> Unit) {
         onItemClickListener = listener
     }
 

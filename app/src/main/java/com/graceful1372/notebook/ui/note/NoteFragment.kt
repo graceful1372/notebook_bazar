@@ -68,10 +68,10 @@ class NoteFragment : Fragment(), NoteContract.View {
                             //Search file note with title Filter
                             presenter.searchNote(newText, "note")
 
-
                             return true
                         }
                     })
+
 
 
                 }

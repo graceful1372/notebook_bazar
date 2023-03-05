@@ -1,5 +1,7 @@
 package com.graceful1372.notebook.ui.todo
 
+import android.graphics.Matrix
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -7,23 +9,25 @@ import android.view.View.VISIBLE
 import android.view.animation.*
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.graceful1372.notebook.R
-import com.graceful1372.notebook.databinding.FragmentTodoBinding
 import com.graceful1372.notebook.data.model.NoteEntity
 import com.graceful1372.notebook.data.repository.todo.TodoRepository
+import com.graceful1372.notebook.databinding.FragmentTodoBinding
 import com.graceful1372.notebook.ui.todo.calendarSheet.CalendarSheetFragment
-
 import com.graceful1372.notebook.utils.calendar.model.CalendarModel
+import com.graceful1372.notebook.utils.toPersian
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
@@ -31,8 +35,8 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
     //Binding
     private lateinit var binding: FragmentTodoBinding
 
-//    @Inject
-//    lateinit var todoAdapter: AdapterTodo
+    @Inject
+    lateinit var todoAdapter: AdapterTodo
 //    lateinit var todoAdapter: AdapterTodo
 
     @Inject
@@ -109,12 +113,20 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
         binding.apply {
 
 
+
             //set default date
-            txtShowDate.text = dateDefualt
+            val currentLanguage = Locale.getDefault()
+            if (currentLanguage.language == "fa") {
+                txtShowDate.text = dateDefualt?.toPersian()
+
+            } else {
+                txtShowDate.text = dateDefualt
+            }
 
             //Click on the list
-          /*  todoAdapter.setOnItemClickListener {
-
+            todoAdapter.setOnItemClickListener {
+                Toast.makeText(activity, it.todo.toString(), Toast.LENGTH_SHORT).show()
+/*
                 //Delete one item form list
                 ItemTouchHelper(
                     object : ItemTouchHelper.SimpleCallback(
@@ -136,7 +148,8 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
 
                         }
                     }).attachToRecyclerView(recyclerView)
-            }*/
+              */
+            }
 
             //Save
             btnSave.setOnClickListener {
@@ -202,6 +215,7 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
         }
 
     }
+
     data class PojoOfJsonArray(
         val name: String,
         val date: String
@@ -212,12 +226,12 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
         binding.recyclerView.visibility = VISIBLE
 
         //Group item with data sort
-        val groupedMapMap :Map<String , List<NoteEntity>> = todos.groupBy {
+        val groupedMapMap: Map<String, List<NoteEntity>> = todos.groupBy {
             it.date
         }
 
         val consolidatedList = mutableListOf<AdapterTodo.ListItem>()
-        for (date:String in groupedMapMap.keys){
+        for (date: String in groupedMapMap.keys) {
             consolidatedList.add(AdapterTodo.DateItem(date))
             val groupItems: List<NoteEntity>? = groupedMapMap[date]
             groupItems?.forEach {
@@ -225,11 +239,11 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
             }
         }
 
-//        todoAdapter.setData(todos)
-        val myAdapter = AdapterTodo(consolidatedList)
+        todoAdapter.setData(consolidatedList)
+//        val myAdapter = AdapterTodo(consolidatedList)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = myAdapter
+            adapter = todoAdapter
         }
 
 

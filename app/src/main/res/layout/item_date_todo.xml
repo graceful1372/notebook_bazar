@@ -16,7 +16,8 @@
         android:text="16/5/1401"
         android:textStyle="bold"
         android:textSize="15sp"
-
+        android:fontFamily="@font/vazir"
+android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="5dp"

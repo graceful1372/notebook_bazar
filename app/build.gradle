@@ -11,7 +11,7 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\grace\\OneDrive\\Desktop\\1\\key-note-book.jks')
+            storeFile file('D:\\desktop\\1\\key-note-book.jks')
             storePassword 'g1r2a3c4'
             keyAlias 'key0'
             keyPassword 'g1r2a3c4'
