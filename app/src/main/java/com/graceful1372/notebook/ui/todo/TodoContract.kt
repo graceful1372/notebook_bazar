@@ -18,7 +18,11 @@ interface TodoContract {
         fun save(entity: NoteEntity)
         fun loadAllTodos(todo:String)
         fun deleteAll(todo: String)
-        fun delete(entity: NoteEntity)
+        fun singleDelete(category:String , id:Int)
+
+        fun update( int: Int,boolean: Boolean )
+        fun updateCheckbox( int: Int,boolean: Boolean )
+
 
     }
 }

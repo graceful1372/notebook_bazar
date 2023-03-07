@@ -36,4 +36,14 @@ interface  NoteDao {
 
     @Query("SELECT * FROM $NOTE_TABLE WHERE title LIKE '%' || :title || '%' AND category LIKE '%' || :category || '%'")
     fun searchNote(title:String,category: String):Observable<List<NoteEntity>>
+
+
+    @Query("UPDATE $NOTE_TABLE SET isShow=:b WHERE id=:id")
+    fun updateIsShow (b: Boolean ,id: Int ) : Completable
+
+    @Query("UPDATE $NOTE_TABLE SET isCheck=:b WHERE id=:id")
+    fun updateCheckBox(b: Boolean, id: Int): Completable
+
+    @Query("DELETE FROM $NOTE_TABLE WHERE id=:id AND category =:s ")
+    fun deleteSingle(s: String, id: Int): Completable
 }

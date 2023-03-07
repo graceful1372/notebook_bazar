@@ -21,79 +21,32 @@
         android:paddingHorizontal="10dp"
         android:text="hello"
         android:textSize="18sp"
-        android:layout_marginStart="40dp"
+        app:layout_constraintEnd_toStartOf="@id/one_delete"
+        app:layout_constraintStart_toEndOf="@id/checkbox" />
+
+    <CheckBox
+        android:id="@id/checkbox"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#FF9800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+
+        />
+
+
+    <ImageView
+        android:id="@+id/one_delete"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_delete"
+        android:backgroundTint="#FF5722"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/viewCheck"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:visibility="gone"
-        android:background="@drawable/bg_viewcheck"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/txt_show_todo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <View
-        android:id="@+id/viewChecked"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-
-        android:background="@drawable/bg_viewcheck_click"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/txt_show_todo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--
-    <?xml version="1.0" encoding="utf-8"?>
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="3dp"
-        android:background="@color/white"
-        app:cardElevation="3dp"
 
-
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            &lt;!&ndash;Show Text&ndash;&gt;
-            <TextView
-                android:id="@+id/txt_show_todo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/vazir"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-
-                android:text="hello"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-
-            <View
-                android:id="@+id/view_done"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/black"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/txt_show_todo"
-                app:layout_constraintTop_toTopOf="@id/txt_show_todo" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.cardview.widget.CardView>-->

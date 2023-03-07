@@ -49,7 +49,7 @@ class CalendarFragment : Fragment(), CalendarContract.View {
         val date = "$y/$m/$d"
 
         presenter.loadWithDate(date)
-        Toast.makeText(activity, date, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(activity, date, Toast.LENGTH_SHORT).show()
     }
 
 

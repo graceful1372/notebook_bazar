@@ -22,7 +22,10 @@ import com.graceful1372.notebook.data.model.NoteEntity
 import com.graceful1372.notebook.data.repository.todo.TodoRepository
 import com.graceful1372.notebook.databinding.FragmentTodoBinding
 import com.graceful1372.notebook.ui.todo.calendarSheet.CalendarSheetFragment
+import com.graceful1372.notebook.utils.CHECK
+import com.graceful1372.notebook.utils.DELETE
 import com.graceful1372.notebook.utils.calendar.model.CalendarModel
+import com.graceful1372.notebook.utils.isSHOW
 import com.graceful1372.notebook.utils.toPersian
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -47,6 +50,7 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
 
     @Inject
     lateinit var today: CalendarModel
+
 
 
     //Other
@@ -113,7 +117,6 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
         binding.apply {
 
 
-
             //set default date
             val currentLanguage = Locale.getDefault()
             if (currentLanguage.language == "fa") {
@@ -124,8 +127,23 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
             }
 
             //Click on the list
-            todoAdapter.setOnItemClickListener {
-                Toast.makeText(activity, it.todo.toString(), Toast.LENGTH_SHORT).show()
+            todoAdapter.setOnItemClickListener { entity, type ->
+                when (type) {
+                    isSHOW -> {
+                        presenter.update(entity.id, !entity.isShow)
+
+                    }
+                    DELETE -> {
+                        presenter.singleDelete("todo" , entity.id)
+                    }
+                    CHECK -> {
+
+                        presenter.updateCheckbox(entity.id , !entity.isCheck)
+                        Toast.makeText(activity, "${entity.isCheck} + ${entity.isCheck}", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
 /*
                 //Delete one item form list
                 ItemTouchHelper(
@@ -163,6 +181,8 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
                         entity.todo = todo
                         entity.date = date as String
                         entity.category = "todo"
+                        entity.isCheck = false
+                        entity.isShow = false
                         presenter.save(entity)
 
                     } else {
@@ -170,6 +190,8 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
                         entity.todo = todo
                         entity.date = dateDefualt.toString()
                         entity.category = "todo"
+                        entity.isCheck = false
+                        entity.isShow = false
                         Toast.makeText(activity, dateDefualt, Toast.LENGTH_SHORT).show()
 
                         //Save
@@ -235,7 +257,7 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
             consolidatedList.add(AdapterTodo.DateItem(date))
             val groupItems: List<NoteEntity>? = groupedMapMap[date]
             groupItems?.forEach {
-                consolidatedList.add(AdapterTodo.GeneralItem(it.todo))
+                consolidatedList.add(AdapterTodo.GeneralItem(it.id, it.todo, it.isShow , it.isCheck))
             }
         }
 

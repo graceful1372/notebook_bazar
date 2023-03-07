@@ -46,14 +46,29 @@ class TodoPresenter @Inject constructor(
             .subscribe{}
     }
 
-    override fun delete(entity: NoteEntity) {
-        disposable = repository.deleteSingel(entity)
+    override fun singleDelete(category: String , id:Int) {
+        disposable = repository.deleteSingle(category , id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }
 
+    override fun update(int: Int ,boolean: Boolean ) {
+        disposable = repository.update( int ,boolean)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
 
+
+
+    }
+
+    override fun updateCheckbox(int: Int, boolean: Boolean) {
+        disposable = repository.updateCheckBox(int , boolean)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+    }
 
 
 }

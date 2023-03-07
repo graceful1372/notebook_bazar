@@ -12,5 +12,8 @@ class TodoRepository @Inject constructor(private val dao:NoteDao) {
 
     fun deleteAll(todo: String)= dao.deleteAllTodo(todo)
 
-    fun deleteSingel(entity: NoteEntity)= dao.deleteNote(entity)
+    fun deleteSingle(category:String , id: Int)= dao.deleteSingle(category , id )
+
+    fun update(id:Int , boolean: Boolean ) = dao.updateIsShow(boolean , id)
+    fun updateCheckBox(id: Int, boolean: Boolean) = dao.updateCheckBox(boolean, id)
 }

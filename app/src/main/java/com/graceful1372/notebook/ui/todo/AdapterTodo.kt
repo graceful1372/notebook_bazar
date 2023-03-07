@@ -1,5 +1,6 @@
 package com.graceful1372.notebook.ui.todo
 
+import android.opengl.Visibility
 import android.provider.ContactsContract.CommonDataKinds.Note
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -10,7 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.graceful1372.notebook.data.model.NoteEntity
 import com.graceful1372.notebook.databinding.ItemChildTodoBinding
 import com.graceful1372.notebook.databinding.ItemDateTodoBinding
+import com.graceful1372.notebook.utils.CHECK
+import com.graceful1372.notebook.utils.DELETE
+import com.graceful1372.notebook.utils.isSHOW
 import com.graceful1372.notebook.utils.toPersian
+import java.util.IllegalFormatCodePointException
 import java.util.Locale
 import javax.inject.Inject
 
@@ -43,21 +48,40 @@ class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
 
             bindingChild.apply {
                 txtShowTodo.text = item.todo
-               txtShowTodo.maxLines = 1;
+                txtShowTodo.maxLines = 1;
                 txtShowTodo.ellipsize = TextUtils.TruncateAt.END;
+                oneDelete.visibility = if (item.isShow) View.VISIBLE else View.GONE
+                checkbox.isChecked = item.isCheck
             }
+            //Show
             bindingChild.root.setOnClickListener {
-                onItemClickListener?.let {
-                    it(item)
-//                    bindingChild.viewDone.visibility = View.VISIBLE
+                onItemClickListener?.let { i ->
+//                    item.isShow = !item.isShow
+                    bindingChild.oneDelete.visibility = if (item.isShow) View.VISIBLE else View.GONE
+                    i(item, isSHOW)
+
                 }
             }
+
+            //Delete
+            bindingChild.oneDelete.setOnClickListener {
+                onItemClickListener?.let {
+                    it(item, DELETE)
+                }
+            }
+
+            //Check
+            bindingChild.checkbox.setOnClickListener {
+                onItemClickListener?.let {
+
+                        bindingChild.checkbox.isChecked = item.isCheck
+
+                    it(item, CHECK)
+                }
+            }
+
         }
 
-        // Click 
-        fun click(itemclick: NoteEntity) {
-
-        }
 
     }
 
@@ -135,12 +159,14 @@ class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
         val todoDiffUtil = TodoDiffUtils(items, data)
         val diffUtils = DiffUtil.calculateDiff(todoDiffUtil)
         items = data
+
         diffUtils.dispatchUpdatesTo(this)
     }
 
+
     //Click
-    private var onItemClickListener: ((GeneralItem) -> Unit)? = null
-    fun setOnItemClickListener(listener: (GeneralItem) -> Unit) {
+    private var onItemClickListener: ((GeneralItem, String) -> Unit)? = null
+    fun setOnItemClickListener(listener: (GeneralItem, String) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -158,6 +184,9 @@ class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
     ) : ListItem(TYPE_DATE)
 
     class GeneralItem(
+        var id: Int,
         var todo: String,
+        var isShow: Boolean,
+        var isCheck:Boolean
     ) : ListItem(TYPE_GENERAL)
 }

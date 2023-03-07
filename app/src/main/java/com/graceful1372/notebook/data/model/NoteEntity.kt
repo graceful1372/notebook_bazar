@@ -13,6 +13,8 @@ data class NoteEntity (
     var title :String = "",
     var text:String = "" , // The text  entered in  FragmentNote
     var category:String = "" ,
+    var isCheck:Boolean = false ,
+    var isShow:Boolean = false
 
 
     )
