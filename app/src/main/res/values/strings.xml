@@ -15,6 +15,7 @@
     <string name="hint_text">This here can write your note .</string>
     <string name="way_of_connection_with_us">Way of connection with us</string>
     <string name="address_copy">The address was copied</string>
+    <string name="today">Today</string>
     <string name="about_fragmet">This program is presented as a notebook with version 1.0.0, which also includes personal calendar features.</string>
 
     <!--Calendar-->

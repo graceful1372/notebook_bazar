@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.graceful1372.notebook.databinding.FragmentCalendarSheetBinding
@@ -29,29 +30,38 @@ class CalendarSheetFragment : BottomSheetDialogFragment() {
 
     @SuppressLint("SetTextI18n")
     private val adapter: CalendarAdapter = CalendarAdapter { cm ->
-        binding.txtDayOfWeek.text = cm.dayOfWeek.toPersianWeekDay(requireContext()) + " " +
-                cm.iranianDay.toPersianNumber() + " " +
-                cm.iranianMonth.toPersianMonth(requireContext())
+        //InitViews in Calendar sheet
+        binding.apply {
+            txtDayOfWeek.text = cm.dayOfWeek.toPersianWeekDay(requireContext()) + " " +
+                    cm.iranianDay.toPersianNumber() + " " +
+                    cm.iranianMonth.toPersianMonth(requireContext())
 
 
-        binding.btnOk.visibility = View.VISIBLE
-        //Button ok
-        binding.btnOk.setOnClickListener {
-            val y = cm.iranianYear.toString()
-            val m = cm.iranianMonth.toString()
-            val d = cm.iranianDay.toString()
 
-            val date = "$y/$m/$d"
 
-            //Send to TodoFragment
-            val result = Bundle().apply {
-                putString("MY_KEY", date)
+            //Show btn
+            btnOk.visibility = View.VISIBLE
+
+
+            //Button ok
+            btnOk.setOnClickListener {
+                val y = cm.iranianYear.toString()
+                val m = cm.iranianMonth.toString()
+                val d = cm.iranianDay.toString()
+
+                val date = "$y/$m/$d"
+
+                //Send to TodoFragment
+                val result = Bundle().apply {
+                    putString("MY_KEY", date)
+                }
+                setFragmentResult("requestCode", result)
+                dismiss()
+
+
             }
-            setFragmentResult("requestCode", result)
-            dismiss()
-
-
         }
+
 
     }
 

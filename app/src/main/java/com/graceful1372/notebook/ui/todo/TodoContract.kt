@@ -23,6 +23,8 @@ interface TodoContract {
         fun update( int: Int,boolean: Boolean )
         fun updateCheckbox( int: Int,boolean: Boolean )
 
+        fun search(title:String, category: String )
+
 
     }
 }

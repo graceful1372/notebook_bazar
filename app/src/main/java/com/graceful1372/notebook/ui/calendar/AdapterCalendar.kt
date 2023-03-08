@@ -1,11 +1,14 @@
 package com.graceful1372.notebook.ui.calendar
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.graceful1372.notebook.data.model.NoteEntity
 import com.graceful1372.notebook.databinding.ItemChildTodoBinding
+import com.graceful1372.notebook.utils.isVisible
 import javax.inject.Inject
 
 class AdapterCalendar @Inject constructor():RecyclerView.Adapter<AdapterCalendar.ViewHolder>() {
@@ -18,8 +21,10 @@ class AdapterCalendar @Inject constructor():RecyclerView.Adapter<AdapterCalendar
         fun bind (data: NoteEntity){
             binding.apply {
                 txtShowTodo.text = data.todo
-
+                oneDelete.isVisible(false)
+                checkbox.isChecked = data.isCheck
             }
+
         }
     }
 

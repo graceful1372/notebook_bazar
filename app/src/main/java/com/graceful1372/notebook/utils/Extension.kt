@@ -1,5 +1,6 @@
 package com.graceful1372.notebook.utils
 
+import android.view.View
 
 
 //Change number english to persian
@@ -16,4 +17,13 @@ fun String.toPersian():String{
     newsString = newsString.replace("9", "۹")
     newsString = newsString.replace("0", "۰")
     return newsString
+}
+
+fun View.isVisible(b:Boolean){
+    if (b){
+        this.visibility = View.VISIBLE
+    }else{
+        this.visibility = View.INVISIBLE
+    }
+
 }

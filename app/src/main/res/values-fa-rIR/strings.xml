@@ -13,6 +13,8 @@
     <string name="hint_text">متن یادداشتی را که میخواید بنویسید</string>
     <string name="way_of_connection_with_us">راه های ارتباطی با ما</string>
     <string name="address_copy">آدرس جی میل کپی شد</string>
+    <string name="today">امروز</string>
+
     <string name="about_fragmet">این برنامه به صورت یک دفترچه یادداشت با نسخه 1.0.0 ارائه شده است که شامل ویژگی های تقویم شخصی نیز می باشد.</string>
 
 </resources>

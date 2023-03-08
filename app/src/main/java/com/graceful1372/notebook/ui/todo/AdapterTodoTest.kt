@@ -66,7 +66,7 @@ class AdapterTodoTest @Inject constructor() : RecyclerView.Adapter<RecyclerView.
     class NoteWithDateViewHolder(val bindingDate:ItemDateTodoBinding) : RecyclerView.ViewHolder(bindingDate.root) {
         fun bind(noteWithDate: NoteWithDate) {
             // Bind noteWithDate to ViewHolder views
-            bindingDate.showTime.text= noteWithDate.noteEntity.date
+            bindingDate.showDate.text= noteWithDate.noteEntity.date
         }
     }
 

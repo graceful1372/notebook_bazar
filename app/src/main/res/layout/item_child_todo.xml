@@ -28,7 +28,8 @@
         android:id="@id/checkbox"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:backgroundTint="#FF9800"
+        app:buttonTint="@color/purple_500"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 

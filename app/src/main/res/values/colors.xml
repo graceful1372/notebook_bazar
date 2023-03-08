@@ -14,4 +14,6 @@
     <color name="light_navy">#78aae5</color>
     <color name="text_on_calendar">#8eaac9</color>
     <color name="text_color">#fcffff</color>
+    <color name="white_background">#f6f6f6</color>
+
 </resources>

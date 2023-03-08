@@ -1,46 +1,79 @@
 package com.graceful1372.notebook.ui.todo
 
 import android.opengl.Visibility
+import android.os.Build
 import android.provider.ContactsContract.CommonDataKinds.Note
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.graceful1372.notebook.R
 import com.graceful1372.notebook.data.model.NoteEntity
 import com.graceful1372.notebook.databinding.ItemChildTodoBinding
 import com.graceful1372.notebook.databinding.ItemDateTodoBinding
 import com.graceful1372.notebook.utils.CHECK
 import com.graceful1372.notebook.utils.DELETE
+import com.graceful1372.notebook.utils.calendar.model.CalendarModel
 import com.graceful1372.notebook.utils.isSHOW
 import com.graceful1372.notebook.utils.toPersian
-import java.util.IllegalFormatCodePointException
-import java.util.Locale
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
-class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterTodo @Inject constructor(today:CalendarModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //Binding
     private lateinit var binding: ItemDateTodoBinding
     private lateinit var bindingChild: ItemChildTodoBinding
     private var items = emptyList<ListItem>()
-    private var items2 = emptyList<NoteEntity>()
+
+    private lateinit var stringToday : String
+
+    val t = today.iranianDay.toString()
+    val m = today.iranianMonth.toString()
+    val y = today.iranianYear.toString()
+    val curentdate = "$y/$m/$t"
+
 
     //Check to persian mode in device
     val currentLocal = Locale.getDefault()
 
+    //View holder date
     inner class DateViewHolder(val binding: ItemDateTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DateItem) {
 
-            if (currentLocal.language == "fa") {
-                binding.showTime.text = item.date.toPersian()
-            } else {
-                binding.showTime.text = item.date
+
+
+            if (item.date == curentdate) {
+                binding.apply {
+                    showDate.text = stringToday
+                    showDate.textSize = 18f
+                }
+
+
             }
+            else  {
+
+                if (currentLocal.language == "fa") {
+                    binding.showDate.text = item.date.toPersian()
+                } else {
+                    binding.showDate.text = item.date
+
+
+                }
+            }
+
         }
     }
 
+    //View holder child date
     inner class TodoViewModel(binding: ItemChildTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GeneralItem) {
@@ -74,7 +107,7 @@ class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
             bindingChild.checkbox.setOnClickListener {
                 onItemClickListener?.let {
 
-                        bindingChild.checkbox.isChecked = item.isCheck
+                    bindingChild.checkbox.isChecked = item.isCheck
 
                     it(item, CHECK)
                 }
@@ -90,13 +123,13 @@ class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
         binding = ItemDateTodoBinding.inflate(layoutInflater, parent, false)
         bindingChild = ItemChildTodoBinding.inflate(layoutInflater, parent, false)
 
+        stringToday = parent.context.getString(R.string.today)
 
         return when (viewType) {
             ListItem.TYPE_DATE ->
                 DateViewHolder(binding)
             else ->
-                //با فعال کردن این جا تنظیمات لایه به هم میخورد
-//                GeneralViewHolder(ItemChildTodoBinding.inflate(layoutInflater))
+
                 TodoViewModel(bindingChild)
 
 
@@ -187,6 +220,6 @@ class AdapterTodo @Inject constructor() : RecyclerView.Adapter<RecyclerView.View
         var id: Int,
         var todo: String,
         var isShow: Boolean,
-        var isCheck:Boolean
+        var isCheck: Boolean
     ) : ListItem(TYPE_GENERAL)
 }

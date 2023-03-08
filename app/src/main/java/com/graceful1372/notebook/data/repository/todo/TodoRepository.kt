@@ -10,6 +10,8 @@ class TodoRepository @Inject constructor(private val dao:NoteDao) {
 
     fun loadAllTodo(todo:String) = dao.getNoteString(todo )
 
+    fun searchNote(title:String,category:String)=dao.searchNote(title,category)
+
     fun deleteAll(todo: String)= dao.deleteAllTodo(todo)
 
     fun deleteSingle(category:String , id: Int)= dao.deleteSingle(category , id )

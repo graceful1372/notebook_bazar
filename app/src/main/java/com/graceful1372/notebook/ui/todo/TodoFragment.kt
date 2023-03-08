@@ -1,7 +1,6 @@
 package com.graceful1372.notebook.ui.todo
 
-import android.graphics.Matrix
-import android.graphics.drawable.Drawable
+
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -9,7 +8,6 @@ import android.view.View.VISIBLE
 import android.view.animation.*
 import android.widget.Toast
 import androidx.annotation.NonNull
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -52,9 +50,8 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
     lateinit var today: CalendarModel
 
 
-
     //Other
-    private val presenter by lazy { TodoPresenter(repository, this) }
+    private val presenter by lazy { TodoPresenter(repository, this, today) }
     var date: String? = ""
     var dateDefualt: String? = ""
 
@@ -72,7 +69,22 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
             object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     // Add menu items here
-                    menuInflater.inflate(R.menu.menu_todo, menu)
+                    menuInflater.inflate(R.menu.menu_note, menu)
+                    val searchTodo = menu.findItem(R.id.toolbar_search)
+                    val searchViewTodo =
+                        searchTodo.actionView as androidx.appcompat.widget.SearchView
+                    searchViewTodo.queryHint = getString(R.string.search)
+                    searchViewTodo.setOnQueryTextListener(object :
+                        androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            return false
+                        }
+
+                        override fun onQueryTextChange(newText: String): Boolean {
+                            presenter.search(newText, "todo")
+                            return true
+                        }
+                    })
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -90,7 +102,6 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
 
             }, viewLifecycleOwner, Lifecycle.State.RESUMED
         )
-
 
         return binding.root
     }
@@ -134,39 +145,21 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
 
                     }
                     DELETE -> {
-                        presenter.singleDelete("todo" , entity.id)
+                        presenter.singleDelete("todo", entity.id)
                     }
                     CHECK -> {
 
-                        presenter.updateCheckbox(entity.id , !entity.isCheck)
-                        Toast.makeText(activity, "${entity.isCheck} + ${entity.isCheck}", Toast.LENGTH_SHORT).show()
+                        presenter.updateCheckbox(entity.id, !entity.isCheck)
+                        Toast.makeText(
+                            activity,
+                            "${entity.isCheck} + ${entity.isCheck}",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                 }
 
-/*
-                //Delete one item form list
-                ItemTouchHelper(
-                    object : ItemTouchHelper.SimpleCallback(
-                        ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-                        ItemTouchHelper.LEFT
-                    ) {
-                        override fun onMove(
-                            recyclerView: RecyclerView,
-                            viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder
-                        ): Boolean {
-                            viewHolder.adapterPosition
-                            target.adapterPosition
-                            // move item in `fromPos` to `toPos` in adapter.
-                            return true // true if moved, false otherwise
-                        }
 
-                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                            presenter.delete(it)
-
-                        }
-                    }).attachToRecyclerView(recyclerView)
-              */
             }
 
             //Save
@@ -257,7 +250,7 @@ class TodoFragment : Fragment(), TodoContract.View, FragmentResultListener {
             consolidatedList.add(AdapterTodo.DateItem(date))
             val groupItems: List<NoteEntity>? = groupedMapMap[date]
             groupItems?.forEach {
-                consolidatedList.add(AdapterTodo.GeneralItem(it.id, it.todo, it.isShow , it.isCheck))
+                consolidatedList.add(AdapterTodo.GeneralItem(it.id, it.todo, it.isShow, it.isCheck))
             }
         }
 

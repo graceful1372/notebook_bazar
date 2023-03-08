@@ -11,7 +11,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher_m"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.Notebook"
         tools:targetApi="31">
         <activity
